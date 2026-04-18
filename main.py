@@ -1,4 +1,6 @@
+import warnings
 from lxml import etree
+from ascii_magic import AsciiArt, Back
 import urllib.request as urlreq
 
 
@@ -15,10 +17,12 @@ def getCookies(response):
     for i in range(2,10):
         try:
             print(tree.xpath(f'/html/body/div/div/div[4]/div[1]/div[2]/div[{i}]/div/div[2]/div[1]/p[1]')[0].text)
+            my_art = AsciiArt.from_url(tree.xpath(f'/html/body/div/div/div[4]/div[1]/div[2]/div[{i}]/div/div[1]/img[1]/@src')[0])
+            my_art.to_terminal(columns=30)
         except: return 1
     return 0
 
-
+warnings.simplefilter("ignore")
 html = getHTML('https://crumblcookies.com/')
 getCookies(html)
 
