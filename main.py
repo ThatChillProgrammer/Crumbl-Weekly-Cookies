@@ -1,6 +1,6 @@
 import warnings
 from lxml import etree
-from ascii_magic import AsciiArt, Back
+from ascii_magic import AsciiArt
 import urllib.request as urlreq
 
 
