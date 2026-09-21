@@ -13,13 +13,15 @@ def getHTML(url:str):
 def getCookies(response):
     htmlparser = etree.HTMLParser()
     tree = etree.parse(response, htmlparser)
-    print("Weekly Crumbl Cookies:")
-    for i in range(2,10):
+    print("Weekly Crumbl Cookies:\n")
+    for i in range(2,8):
         try:
-            print(tree.xpath(f'/html/body/div/div/div[4]/div[1]/div[2]/div[{i}]/div/div[2]/div[1]/p[1]')[0].text)
-            my_art = AsciiArt.from_url(tree.xpath(f'/html/body/div/div/div[4]/div[1]/div[2]/div[{i}]/div/div[1]/img[1]/@src')[0])
+            print(tree.xpath(f'/html/body/div/div/div[4]/main/div[2]/div[{i}]/div/div[2]/div[1]/p[1]')[0].text)
+            my_art = AsciiArt.from_url(tree.xpath(f'/html/body/div/div/div[4]/main/div[2]/div[{i}]/div/div[1]/img[1]/@src')[0])
             my_art.to_terminal(columns=30)
-        except: return 1
+        except: 
+            print("--Error loading asset--\n")
+            continue
     return 0
 
 warnings.simplefilter("ignore")
